@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://mildbg3skv7m"]
+
+[ext_resource type="Script" uid="uid://7p7da12yt7o2" path="res://card.gd" id="1_w52ek"]
+
+[node name="BoxContainer" type="BoxContainer"]
+offset_right = 300.0
+offset_bottom = 80.0
+script = ExtResource("1_w52ek")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="name_label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 12.0
+offset_right = 284.0
+offset_bottom = 69.0
+
+[node name="image" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0

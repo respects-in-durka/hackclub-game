@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://jccfibb85h71"]
+
+[ext_resource type="Script" uid="uid://dpoy2hwm7lps" path="res://shop.gd" id="1_viryw"]
+[ext_resource type="Script" uid="uid://bbksan5njgkhj" path="res://v_box_container.gd" id="2_e7rdd"]
+
+[node name="ScrollContainer" type="ScrollContainer"]
+clip_contents = false
+offset_right = 300.0
+offset_bottom = 1080.0
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+script = ExtResource("1_viryw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 90
+alignment = 1
+script = ExtResource("2_e7rdd")

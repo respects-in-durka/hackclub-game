@@ -1,17 +1,103 @@
 [gd_scene load_steps=10 format=3 uid="uid://cknymk43pqtr8"]
 
 [ext_resource type="Script" uid="uid://couaie48l7pfe" path="res://main.gd" id="1_dmrlw"]
-[ext_resource type="PackedScene" uid="uid://jccfibb85h71" path="res://shop.tscn" id="1_oex3p"]
 [ext_resource type="Texture2D" uid="uid://ckuunadlwg4b" path="res://victim.png" id="2_sck4r"]
 [ext_resource type="Texture2D" uid="uid://b40y67qfa856u" path="res://blood_particle.png" id="3_8ce7h"]
 [ext_resource type="Texture2D" uid="uid://dad8a1yinm2nj" path="res://pentagram.png" id="4_3yxjw"]
 [ext_resource type="Texture2D" uid="uid://inxj6e0yhb1c" path="res://basement.png" id="5_elgsa"]
 [ext_resource type="Texture2D" uid="uid://cyb5hwdrmekh3" path="res://trashbags.png" id="7_1mhn8"]
 [ext_resource type="Texture2D" uid="uid://mjs5h8d7im3m" path="res://hangman-s-noose.png" id="8_0rof8"]
-[ext_resource type="Texture2D" path="res://bullskull.jpg" id="9_w8cd7"]
+[ext_resource type="Texture2D" uid="uid://ulbbjj7rksgk" path="res://bullskull.png" id="8_w8cd7"]
+[ext_resource type="AudioStream" uid="uid://dwm3lyoxm2o46" path="res://music.mp3" id="9_w8cd7"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dmrlw")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.08400001
+anchor_top = 0.12200001
+anchor_right = 0.24900001
+anchor_bottom = 0.216
+offset_left = 1458.72
+offset_top = -131.76001
+offset_right = 1441.9199
+offset_bottom = 846.72
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="BoxContainer" type="BoxContainer" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="basic_pentagram" type="TextureButton" parent="ScrollContainer/VBoxContainer/BoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("4_3yxjw")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/BoxContainer"]
+layout_mode = 2
+text = "Basic Pentagram (+1)
+[10 BP]"
+
+[node name="BoxContainer2" type="BoxContainer" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="trash_bags" type="TextureButton" parent="ScrollContainer/VBoxContainer/BoxContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("7_1mhn8")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/BoxContainer2"]
+layout_mode = 2
+text = "Passive Blood (+1)
+[200 BP]"
+
+[node name="BoxContainer3" type="BoxContainer" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="hangsman_know" type="TextureButton" parent="ScrollContainer/VBoxContainer/BoxContainer3"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("8_0rof8")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/BoxContainer3"]
+layout_mode = 2
+text = "Passive Blood (+2)
+[1000 BP]"
+
+[node name="BoxContainer4" type="BoxContainer" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="skull" type="TextureButton" parent="ScrollContainer/VBoxContainer/BoxContainer4"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("8_w8cd7")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/BoxContainer4"]
+layout_mode = 2
+text = "Skull (+2)
+[500 BP]"
 
 [node name="clicking_button" type="TextureButton" parent="."]
 offset_left = 658.0
@@ -20,14 +106,6 @@ offset_right = 1250.0
 offset_bottom = 1029.0
 texture_normal = ExtResource("2_sck4r")
 metadata/_edit_lock_ = true
-
-[node name="ScrollContainer" parent="." instance=ExtResource("1_oex3p")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -300.0
-offset_right = 0.0
-grow_horizontal = 0
 
 [node name="blood_points_label" type="Label" parent="."]
 offset_left = 21.0
@@ -96,5 +174,16 @@ offset_left = 166.0
 offset_top = 864.0
 offset_right = 404.0
 offset_bottom = 1062.0
-texture = ExtResource("9_w8cd7")
+texture = ExtResource("8_w8cd7")
 expand_mode = 1
+
+[node name="player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_w8cd7")
+autoplay = true
+
+[node name="enable_particles" type="Button" parent="."]
+offset_left = 21.0
+offset_top = 1017.0
+offset_right = 203.0
+offset_bottom = 1070.0
+text = "Enable Particles"

@@ -11,6 +11,7 @@ var blood_label: Label
 var stats_label: Label
 var blood_particle: CPUParticles2D
 var skullbull_img: TextureRect
+var enable_particles: bool = false
 
 class State:
 	var BloodPoints: int
@@ -24,58 +25,42 @@ class Stats:
 	var skullbullincum: int
 	
 func add_upgrades():
-	var scene = preload("res://upgrade.tscn")
-	var basic_pentagram: UpgradeCard = scene.instantiate()
-	basic_pentagram.icon_path = "res://pentagram.png"
-	basic_pentagram.upgrade_name = "Basic Pentagram (+1)\n[10 BP]"
-	basic_pentagram.buy_callback = func():
+	get_node("ScrollContainer/VBoxContainer/BoxContainer/basic_pentagram").pressed.connect(func():
 		if state.BloodPoints > 10: 
 			state.BloodPoints -= 10
 			pentagram.visible = true
 			state.Upgrades.append(func(x): return x+1)
 			stats.pentagrams += 1
 			_update_blood_points()
-			_update_stats()
-	var trash_bags_passive_income: UpgradeCard = basic_pentagram.duplicate()
-	trash_bags_passive_income.upgrade_name = "Passive Blood (+1)\n[200 BP]"
-	trash_bags_passive_income.icon_path = "res://trashbags.png"
-	trash_bags_passive_income.buy_callback = func():
+			_update_stats())
+	
+	get_node("ScrollContainer/VBoxContainer/BoxContainer2/trash_bags").pressed.connect(func():
 		if state.BloodPoints > 200:
 			state.BloodPoints -= 200
 			trash_bags.visible = true
 			state.PassiveIncome += 1
 			stats.trash_bags += 1
 			_update_blood_points()
-			_update_stats()
-	var hangmans_knot: UpgradeCard = basic_pentagram.duplicate()
-	hangmans_knot.upgrade_name = "Passive Blood (+2)\n[1000 BP]"
-	hangmans_knot.icon_path = "res://hangman-s-noose.png"
-	hangmans_knot.buy_callback = func():
+			_update_stats())
+	
+	get_node("ScrollContainer/VBoxContainer/BoxContainer3/hangsman_know").pressed.connect(func():
 		if state.BloodPoints > 1000:
 			state.BloodPoints -= 1000
 			hangmans_knot.visible = true
 			state.PassiveIncome += 2
 			stats.hangsmans_knots += 1
 			_update_blood_points()
-			_update_stats()
-	var skullbull: UpgradeCard = basic_pentagram.duplicate()
-	skullbull.upgrade_name = "Skull (+2)\n[500 BP]"
-	skullbull.icon_path = "res://bullskull.png"
-	skullbull.buy_callback = func():
+			_update_stats())
+
+	get_node("ScrollContainer/VBoxContainer/BoxContainer4/skull").pressed.connect(func():
 		if state.BloodPoints > 500:
 			state.BloodPoints -= 500
 			state.Upgrades.append(func(x): return x+2)
 			skullbull_img.visible = true
 			stats.skullbullincum += 1
 			_update_blood_points()
-			_update_stats()
-	
-	var upgrades_container = get_node("ScrollContainer/VBoxContainer")
-	upgrades_container.add_child(basic_pentagram)
-	upgrades_container.add_child(trash_bags_passive_income)
-	upgrades_container.add_child(hangmans_knot)
-	upgrades_container.add_child(skullbull)
-	
+			_update_stats())
+
 func _init():
 	state = State.new()
 	state.BloodPoints = 0
@@ -101,16 +86,19 @@ func _update_blood_points():
 	blood_label.text = "Blood Points: " + str(state.BloodPoints)
 	
 func _update_stats():
-	stats_label.text = "Pentagrams: %d\nTrash Bags: %d\nHangman Knots: %d\nSkulls :%d\n" % [stats.pentagrams, stats.trash_bags, stats.hangsmans_knots, stats.skullbullincum]
+	stats_label.text = "Pentagrams: %d\nTrash Bags: %d\nHangman Knots: %d\nSkulls: %d\n" % [stats.pentagrams, stats.trash_bags, stats.hangsmans_knots, stats.skullbullincum]
 	
 func _passive_income():
 	state.BloodPoints += state.PassiveIncome
 	_update_blood_points()
 
 func _ready():
+	add_upgrades()
 	pentagram = get_node("pentagram")
 	pentagram.visible = false
 	
+	get_node("enable_particles").pressed.connect(func():
+		enable_particles = not enable_particles)
 	skullbull_img = get_node("bullskull")
 	skullbull_img.visible = false	
 	
@@ -134,13 +122,11 @@ func _ready():
 	passive_timer.timeout.connect(_passive_income)
 	passive_timer.start()
 	
-	add_upgrades()
-	
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		#spawn_particles(event.position)
-		pass
-
+		if enable_particles: 
+			spawn_particles(event.position)
+		
 func spawn_particles(position: Vector2):
 	blood_particle.global_position = position
 	

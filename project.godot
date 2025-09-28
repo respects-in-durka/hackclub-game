@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-mouse_cursor/custom_image="uid://2kikj4b3xp7c"
 
 [rendering]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciiseq4ntgwo6"
-path="res://.godot/imported/bullskull.jpg-9f749d10fc97fdf1afa015322690e259.ctex"
+uid="uid://ulbbjj7rksgk"
+path="res://.godot/imported/bullskull.png-3d354896a1f66ee3735febe076b8c1a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bullskull.jpg"
-dest_files=["res://.godot/imported/bullskull.jpg-9f749d10fc97fdf1afa015322690e259.ctex"]
+source_file="res://bullskull.png"
+dest_files=["res://.godot/imported/bullskull.png-3d354896a1f66ee3735febe076b8c1a8.ctex"]
 
 [params]
 

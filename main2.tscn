@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://inxj6e0yhb1c" path="res://basement.png" id="5_elgsa"]
 [ext_resource type="Texture2D" uid="uid://cyb5hwdrmekh3" path="res://trashbags.png" id="7_1mhn8"]
 [ext_resource type="Texture2D" uid="uid://mjs5h8d7im3m" path="res://hangman-s-noose.png" id="8_0rof8"]
-[ext_resource type="Texture2D" uid="uid://ciiseq4ntgwo6" path="res://bullskull.jpg" id="9_w8cd7"]
+[ext_resource type="Texture2D" path="res://bullskull.jpg" id="9_w8cd7"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dmrlw")

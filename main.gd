@@ -10,7 +10,7 @@ var hangmans_knot: TextureRect
 var blood_label: Label
 var stats_label: Label
 var blood_particle: CPUParticles2D
-var skullbull: TextureRect
+var skullbull_img: TextureRect
 
 class State:
 	var BloodPoints: int
@@ -59,14 +59,14 @@ func add_upgrades():
 			_update_blood_points()
 			_update_stats()
 	var skullbull: UpgradeCard = basic_pentagram.duplicate()
-	skullbull.upgrade_name = "Passive Blood (+1)\n[200 BP]"
-	skullbull.icon_path = "res://bullskull.jpg"
+	skullbull.upgrade_name = "Skull (+2)\n[500 BP]"
+	skullbull.icon_path = "res://bullskull.png"
 	skullbull.buy_callback = func():
 		if state.BloodPoints > 500:
 			state.BloodPoints -= 500
-			trash_bags.visible = true
-			state.PassiveIncome += 3
-			stats.skullbull += 1
+			state.Upgrades.append(func(x): return x+2)
+			skullbull_img.visible = true
+			stats.skullbullincum += 1
 			_update_blood_points()
 			_update_stats()
 	
@@ -101,7 +101,7 @@ func _update_blood_points():
 	blood_label.text = "Blood Points: " + str(state.BloodPoints)
 	
 func _update_stats():
-	stats_label.text = "Pentagrams: %d\nTrash Bags: %d\nHangman Knots: %d\n" % [stats.pentagrams, stats.trash_bags, stats.hangsmans_knots]
+	stats_label.text = "Pentagrams: %d\nTrash Bags: %d\nHangman Knots: %d\nSkulls :%d\n" % [stats.pentagrams, stats.trash_bags, stats.hangsmans_knots, stats.skullbullincum]
 	
 func _passive_income():
 	state.BloodPoints += state.PassiveIncome
@@ -111,8 +111,8 @@ func _ready():
 	pentagram = get_node("pentagram")
 	pentagram.visible = false
 	
-	skullbull = get_node("bullskull")
-	skullbull.visible = false	
+	skullbull_img = get_node("bullskull")
+	skullbull_img.visible = false	
 	
 	hangmans_knot = get_node("hangman")
 	hangmans_knot.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cknymk43pqtr8"]
+[gd_scene load_steps=10 format=3 uid="uid://cknymk43pqtr8"]
 
 [ext_resource type="Script" uid="uid://couaie48l7pfe" path="res://main.gd" id="1_dmrlw"]
 [ext_resource type="PackedScene" uid="uid://jccfibb85h71" path="res://shop.tscn" id="1_oex3p"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://inxj6e0yhb1c" path="res://basement.png" id="5_elgsa"]
 [ext_resource type="Texture2D" uid="uid://cyb5hwdrmekh3" path="res://trashbags.png" id="7_1mhn8"]
 [ext_resource type="Texture2D" uid="uid://mjs5h8d7im3m" path="res://hangman-s-noose.png" id="8_0rof8"]
+[ext_resource type="Texture2D" uid="uid://ciiseq4ntgwo6" path="res://bullskull.jpg" id="9_w8cd7"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dmrlw")
@@ -89,3 +90,11 @@ offset_left = 18.0
 offset_top = 258.0
 offset_right = 235.79471
 offset_bottom = 443.64783
+
+[node name="bullskull" type="TextureRect" parent="."]
+offset_left = 166.0
+offset_top = 864.0
+offset_right = 404.0
+offset_bottom = 1062.0
+texture = ExtResource("9_w8cd7")
+expand_mode = 1

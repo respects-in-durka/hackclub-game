@@ -10,6 +10,7 @@ var hangmans_knot: TextureRect
 var blood_label: Label
 var stats_label: Label
 var blood_particle: CPUParticles2D
+var skullbull: TextureRect
 
 class State:
 	var BloodPoints: int
@@ -20,6 +21,7 @@ class Stats:
 	var pentagrams: int
 	var trash_bags: int
 	var hangsmans_knots: int
+	var skullbullincum: int
 	
 func add_upgrades():
 	var scene = preload("res://upgrade.tscn")
@@ -56,11 +58,23 @@ func add_upgrades():
 			stats.hangsmans_knots += 1
 			_update_blood_points()
 			_update_stats()
+	var skullbull: UpgradeCard = basic_pentagram.duplicate()
+	skullbull.upgrade_name = "Passive Blood (+1)\n[200 BP]"
+	skullbull.icon_path = "res://bullskull.jpg"
+	skullbull.buy_callback = func():
+		if state.BloodPoints > 500:
+			state.BloodPoints -= 500
+			trash_bags.visible = true
+			state.PassiveIncome += 3
+			stats.skullbull += 1
+			_update_blood_points()
+			_update_stats()
 	
 	var upgrades_container = get_node("ScrollContainer/VBoxContainer")
 	upgrades_container.add_child(basic_pentagram)
 	upgrades_container.add_child(trash_bags_passive_income)
 	upgrades_container.add_child(hangmans_knot)
+	upgrades_container.add_child(skullbull)
 	
 func _init():
 	state = State.new()
@@ -96,6 +110,9 @@ func _passive_income():
 func _ready():
 	pentagram = get_node("pentagram")
 	pentagram.visible = false
+	
+	skullbull = get_node("bullskull")
+	skullbull.visible = false	
 	
 	hangmans_knot = get_node("hangman")
 	hangmans_knot.visible = false
@@ -133,3 +150,5 @@ func spawn_particles(position: Vector2):
 	await get_tree().create_timer(blood_particle.lifetime).timeout
 	blood_particle.emitting = false
 	blood_particle.visible = false
+	
+	
